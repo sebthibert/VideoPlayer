@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		F2084AD5290943EE00590CDF /* VideoPlayerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2084AD4290943EE00590CDF /* VideoPlayerApp.swift */; };
-		F2084AD7290943EE00590CDF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2084AD6290943EE00590CDF /* ContentView.swift */; };
+		F2084AD7290943EE00590CDF /* VideoCarousel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2084AD6290943EE00590CDF /* VideoCarousel.swift */; };
 		F2084AD9290943EF00590CDF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F2084AD8290943EF00590CDF /* Assets.xcassets */; };
 		F2084ADC290943EF00590CDF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F2084ADB290943EF00590CDF /* Preview Assets.xcassets */; };
 /* End PBXBuildFile section */
@@ -16,7 +16,7 @@
 /* Begin PBXFileReference section */
 		F2084AD1290943EE00590CDF /* VideoPlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VideoPlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2084AD4290943EE00590CDF /* VideoPlayerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerApp.swift; sourceTree = "<group>"; };
-		F2084AD6290943EE00590CDF /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		F2084AD6290943EE00590CDF /* VideoCarousel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCarousel.swift; sourceTree = "<group>"; };
 		F2084AD8290943EF00590CDF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F2084ADB290943EF00590CDF /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -52,7 +52,7 @@
 			isa = PBXGroup;
 			children = (
 				F2084AD4290943EE00590CDF /* VideoPlayerApp.swift */,
-				F2084AD6290943EE00590CDF /* ContentView.swift */,
+				F2084AD6290943EE00590CDF /* VideoCarousel.swift */,
 				F2084AD8290943EF00590CDF /* Assets.xcassets */,
 				F2084ADA290943EF00590CDF /* Preview Content */,
 			);
@@ -137,7 +137,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F2084AD7290943EE00590CDF /* ContentView.swift in Sources */,
+				F2084AD7290943EE00590CDF /* VideoCarousel.swift in Sources */,
 				F2084AD5290943EE00590CDF /* VideoPlayerApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
