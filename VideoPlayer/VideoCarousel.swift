@@ -130,7 +130,7 @@ struct VideoCarousel: View {
             isDragging = false
           }
         )
-        .onTapGesture { avPlayer.advanceToNextItem() }
+        .onTapGesture { avPlayer.rate = avPlayer.rate == 1 ? 0 : 1 }
         .overlay(Rectangle().opacity(0.1))
       VideoOverlay(videoIndex: viewModel.videoIndex)
         .padding()
