@@ -104,7 +104,7 @@ struct VideoCarousel: View {
   init(viewModel: VideoCarouselViewModel) {
     self.viewModel = viewModel
     viewModel.setup(player: avPlayer)
-    avPlayer.rate = 3
+    avPlayer.rate = 1
   }
 
   var body: some View {
@@ -130,8 +130,8 @@ struct VideoCarousel: View {
             isDragging = false
           }
         )
-//        .onTapGesture { avPlayer.advanceToNextItem() }
-        .overlay(Rectangle().opacity(0.2))
+        .onTapGesture { avPlayer.advanceToNextItem() }
+        .overlay(Rectangle().opacity(0.1))
       VideoOverlay(videoIndex: viewModel.videoIndex)
         .padding()
     }
