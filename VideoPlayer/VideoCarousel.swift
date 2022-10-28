@@ -54,22 +54,43 @@ final class VideoCarouselViewModel: ObservableObject {
     observe(player: player)
   }
 
+  func swipeForward(player: AVQueuePlayer) {
+    player.advanceToNextItem()
+  }
+
+  func swipeBackward(player: AVQueuePlayer) {
+    let numberOfVideosToDrop = VideoPlayerManager.initialItems().count - 1
+    (1...numberOfVideosToDrop)
+      .reversed()
+      .map { $0 - 1 }
+      .forEach { index in
+        resetVideosIfOnLastVideo(numberOfVideosLeft: player.items().count, player: player)
+        player.remove(player.items()[index])
+      }
+  }
+
   private func observe(player: AVQueuePlayer) {
     token = player.observe(\.currentItem) { [weak self] player, _ in
       guard let self = self else {
         return
       }
+      let numberOfVideosLeft = player.items().count
+      self.resetVideosIfOnLastVideo(numberOfVideosLeft: numberOfVideosLeft, player: player)
       withAnimation {
-        self.videoIndex = player.items().count
-      }
-      if player.items().count == 1 {
-        self.addVideosToQueue(player: player)
+        self.videoIndex = numberOfVideosLeft
       }
     }
   }
 
+  private func resetVideosIfOnLastVideo(numberOfVideosLeft: Int, player: AVQueuePlayer) {
+    if numberOfVideosLeft == 1 {
+      addVideosToQueue(player: player)
+    }
+  }
+
   private func addVideosToQueue(player: AVQueuePlayer) {
-    VideoPlayerManager.initialItems()
+    VideoPlayerManager
+      .initialItems()
       .forEach { player.insert($0, after: player.items().last) }
   }
 }
@@ -83,7 +104,7 @@ struct VideoCarousel: View {
   init(viewModel: VideoCarouselViewModel) {
     self.viewModel = viewModel
     viewModel.setup(player: avPlayer)
-    avPlayer.rate = 1
+    avPlayer.rate = 3
   }
 
   var body: some View {
@@ -92,21 +113,24 @@ struct VideoCarousel: View {
         .aspectRatio(1 / 1.3, contentMode: .fit)
         .disabled(true)
         .contentShape(Rectangle())
-//        .gesture(DragGesture()
-//          .onChanged { _ in
-//            guard isDragging == false else {
-//              return
-//            }
-//            isDragging = true
-//            withAnimation {
-//              avPlayer.advanceToNextItem()
-//            }
-//          }
-//          .onEnded { _ in
-//            isDragging = false
-//          }
-//        )
-        .onTapGesture { avPlayer.advanceToNextItem() }
+        .gesture(DragGesture()
+          .onChanged { gesture in
+            let translation = gesture.translation.width
+            guard abs(translation) > 50, isDragging == false else {
+              return
+            }
+            isDragging = true
+            if translation < 0 {
+              viewModel.swipeForward(player: avPlayer)
+            } else {
+              viewModel.swipeBackward(player: avPlayer)
+            }
+          }
+          .onEnded { _ in
+            isDragging = false
+          }
+        )
+//        .onTapGesture { avPlayer.advanceToNextItem() }
         .overlay(Rectangle().opacity(0.2))
       VideoOverlay(videoIndex: viewModel.videoIndex)
         .padding()
